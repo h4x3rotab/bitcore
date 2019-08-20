@@ -137,7 +137,7 @@ export class TransactionModel extends BaseModel<ITransaction> {
       spendOps
     });
 
-    logger.debug('Minting Coins', mintOps.length);
+//    logger.debug('Minting Coins', mintOps.length);
     if (mintOps.length) {
       await Promise.all(
         partition(mintOps, mintOps.length / Config.get().maxPoolSize).map(async mintBatch => {
@@ -157,7 +157,7 @@ export class TransactionModel extends BaseModel<ITransaction> {
       );
     }
 
-    logger.debug('Spending Coins', spendOps.length);
+//    logger.debug('Spending Coins', spendOps.length);
     if (spendOps.length) {
       await Promise.all(
         partition(spendOps, spendOps.length / Config.get().maxPoolSize).map(spendBatch =>
@@ -168,7 +168,7 @@ export class TransactionModel extends BaseModel<ITransaction> {
 
     if (mintOps) {
       const txOps = await this.addTransactions({ ...params, mintOps });
-      logger.debug('Writing Transactions', txOps.length);
+//      logger.debug('Writing Transactions', txOps.length);
       await Promise.all(
         partition(txOps, txOps.length / Config.get().maxPoolSize).map(async txBatch => {
           await this.collection.bulkWrite(getUpdatedBatchIfMempool(txBatch), { ordered: false });

@@ -1,9 +1,11 @@
 import { BTCTxProvider } from './btc';
+import { BTGTxProvider } from './btg';
 import { BCHTxProvider } from './bch';
 import { ETHTxProvider } from './eth';
 
 const providers = {
   BTC: new BTCTxProvider(),
+  BTG: new BTGTxProvider(),
   BCH: new BCHTxProvider(),
   ETH: new ETHTxProvider()
 };

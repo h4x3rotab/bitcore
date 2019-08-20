@@ -5,7 +5,7 @@ import { IWallet } from '../../models/wallet';
 import { RequestHandler } from 'express-serve-static-core';
 import { ChainStateProvider } from '../../providers/chain-state';
 import { Validation } from 'crypto-wallet-core';
-import logger from '../../logger';
+// import logger from '../../logger';
 import { MongoBound } from '../../models/base';
 const router = Router({ mergeParams: true });
 const secp256k1 = require('secp256k1');
@@ -39,7 +39,7 @@ const verifyRequestSignature = (params: VerificationPayload): boolean => {
 
 const authenticate: RequestHandler = async (req: PreAuthRequest, res: Response, next: any) => {
   const { chain, network, pubKey } = req.params as SignedApiRequest;
-  logger.debug('Authenticating request with pubKey: ', pubKey);
+//  logger.debug('Authenticating request with pubKey: ', pubKey);
   let wallet;
   try {
     wallet = await ChainStateProvider.getWallet({ chain, network, pubKey });

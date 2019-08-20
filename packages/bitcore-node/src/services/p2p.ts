@@ -63,6 +63,7 @@ export class P2pWorker {
   private network: string;
   private bitcoreLib: any;
   private bitcoreP2p: any;
+  private bitcoreP2pV: any;
   private chainConfig: any;
   private events: EventEmitter;
   private messages: any;
@@ -82,6 +83,7 @@ export class P2pWorker {
     this.network = network;
     this.bitcoreLib = Chain[this.chain].lib;
     this.bitcoreP2p = Chain[this.chain].p2p;
+    this.bitcoreP2pV = Chain[this.chain].p2pV || 70001;
     this.chainConfig = chainConfig;
     this.events = new EventEmitter();
     this.isSyncing = false;
@@ -94,7 +96,8 @@ export class P2pWorker {
       [this.bitcoreP2p.Inventory.TYPE.TX]: 100000
     };
     this.messages = new this.bitcoreP2p.Messages({
-      network: this.bitcoreLib.Networks.get(this.network)
+      network: this.bitcoreLib.Networks.get(this.network),
+      protocolVersion: this.bitcoreP2pV
     });
     this.pool = new this.bitcoreP2p.Pool({
       addrs: this.chainConfig.trustedPeers.map(peer => {
@@ -148,12 +151,13 @@ export class P2pWorker {
 
     this.pool.on('peertx', (peer, message) => {
       const hash = message.transaction.hash;
-      logger.debug('peer tx received', {
+/*      logger.debug('peer tx received', {
         peer: `${peer.host}:${peer.port}`,
         chain: this.chain,
         network: this.network,
         hash
-      });
+      }); */
+      peer = peer || null;
       if (this.isSyncingNode && !this.isCachedInv(this.bitcoreP2p.Inventory.TYPE.TX, hash)) {
         this.cacheInv(this.bitcoreP2p.Inventory.TYPE.TX, hash);
         this.processTransaction(message.transaction);
@@ -164,12 +168,13 @@ export class P2pWorker {
     this.pool.on('peerblock', async (peer, message) => {
       const { block } = message;
       const { hash } = block;
-      logger.debug('peer block received', {
+/*      logger.debug('peer block received', {
         peer: `${peer.host}:${peer.port}`,
         chain: this.chain,
         network: this.network,
         hash
-      });
+      }); */
+      peer = peer || null;
 
       const blockInCache = this.isCachedInv(this.bitcoreP2p.Inventory.TYPE.BLOCK, hash);
       if (!blockInCache) {
@@ -185,12 +190,13 @@ export class P2pWorker {
     });
 
     this.pool.on('peerheaders', (peer, message) => {
-      logger.debug('peerheaders message received', {
+/*      logger.debug('peerheaders message received', {
         peer: `${peer.host}:${peer.port}`,
         chain: this.chain,
         network: this.network,
         count: message.headers.length
-      });
+      });*/
+      peer = peer || null;
       this.events.emit('headers', message.headers);
     });
 
@@ -243,11 +249,11 @@ export class P2pWorker {
   }
 
   public async getBlock(hash: string) {
-    logger.debug('Getting block, hash:', hash);
+//    logger.debug('Getting block, hash:', hash);
     let received = false;
     return new Promise<Bitcoin.Block>(async resolve => {
       this.events.once(hash, (block: Bitcoin.Block) => {
-        logger.debug('Received block, hash:', hash);
+//        logger.debug('Received block, hash:', hash);
         received = true;
         resolve(block);
       });

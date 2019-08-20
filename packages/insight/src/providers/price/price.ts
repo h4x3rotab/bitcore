@@ -21,7 +21,7 @@ export class PriceProvider {
 
     if (currency === 'USD') {
       const ratesAPI =
-        this.api.getConfig().chain === 'BTC'
+        this.api.getConfig().chain === 'BTG'
           ? this.api.ratesAPI.btc
           : this.api.ratesAPI.bch;
       this.api.httpClient.get(ratesAPI).subscribe(

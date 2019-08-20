@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import * as bitcoreLib from 'bitcore-lib';
+import * as bitcoreLibBtg from 'bitcore-lib-btg';
 import * as bitcoreLibCash from 'bitcore-lib-cash';
 import * as _ from 'lodash';
 import { Observable } from 'rxjs';
@@ -82,28 +82,28 @@ export class SearchProvider {
     const addr = this.extractAddress(inputValue);
     if (addr.charAt(0) === 'C' || addr.charAt(0) === 'H') {
       return false;
-    } else if (coin.toLowerCase() === 'btc' && network === 'mainnet') {
-      return this.isValidBitcoinMainnetAddress(addr);
-    } else if (coin.toLowerCase() === 'btc' && network === 'testnet') {
-      return this.isValidBitcoinTestnetAddress(addr);
+    } else if (coin.toLowerCase() === 'btg' && network === 'mainnet') {
+      return this.isValidBitcoinBtgMainnetAddress(addr);
+    } else if (coin.toLowerCase() === 'btg' && network === 'testnet') {
+      return this.isValidBitcoinBtgTestnetAddress(addr);
     } else if (coin.toLowerCase() === 'bch' && network === 'mainnet') {
       return (
-        this.isValidBitcoinCashMainnetAddress(addr) ||
-        this.isValidBitcoinCashLegacyMainnetAddress(addr)
+        this.isValidBitcoinCashMainnetAddress(addr)// ||
+//        this.isValidBitcoinCashLegacyMainnetAddress(addr)
       );
     }
   }
 
-  private isValidBitcoinMainnetAddress(data: string): boolean {
-    return !!bitcoreLib.Address.isValid(data, 'mainnet');
+  private isValidBitcoinBtgMainnetAddress(data: string): boolean {
+    return !!bitcoreLibBtg.Address.isValid(data, 'mainnet');
   }
-  private isValidBitcoinTestnetAddress(data: string): boolean {
-    return !!bitcoreLib.Address.isValid(data, 'testnet');
+  private isValidBitcoinBtgTestnetAddress(data: string): boolean {
+    return !!bitcoreLibBtg.Address.isValid(data, 'testnet');
   }
 
-  private isValidBitcoinCashLegacyMainnetAddress(data: string): boolean {
-    return !!bitcoreLib.Address.isValid(data, 'mainnet');
-  }
+//  private isValidBitcoinCashLegacyMainnetAddress(data: string): boolean {
+//    return !!bitcoreLib.Address.isValid(data, 'mainnet');
+//  }
 
   private isValidBitcoinCashMainnetAddress(data: string): boolean {
     return !!bitcoreLibCash.Address.isValid(data, 'mainnet');

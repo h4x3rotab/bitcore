@@ -12,7 +12,8 @@ function findConfig(): ConfigType | undefined {
   let bitcoreConfigPaths = [
     `${homedir()}/${configFileName}`,
     `../../../../${configFileName}`,
-    `../../${configFileName}`
+    `../../${configFileName}`,
+    `../${configFileName}`
   ];
   const overrideConfig = argConfigPath || envConfigPath;
   if (overrideConfig) {
@@ -53,13 +54,13 @@ function setTrustedPeers(config: ConfigType): ConfigType {
 const Config = function(): ConfigType {
   let config: ConfigType = {
     maxPoolSize: 50,
-    port: 3000,
+    port: 5750,
     dbHost: process.env.DB_HOST || '127.0.0.1',
-    dbName: process.env.DB_NAME || 'bitcore',
+    dbName: process.env.DB_NAME || 'bitcore-btg',
     dbPort: process.env.DB_PORT || '27017',
     dbUser: process.env.DB_USER || '',
     dbPass: process.env.DB_PASS || '',
-    numWorkers: cpus().length,
+    numWorkers: 2 || cpus().length,
     chains: {},
     services: {
       api: {
@@ -86,7 +87,7 @@ const Config = function(): ConfigType {
   config = _.mergeWith(config, foundConfig, mergeCopyArray);
   if (!Object.keys(config.chains).length) {
     Object.assign(config.chains, {
-      BTC: {
+      BTCdefault: {
         mainnet: {
           chainSource: 'p2p',
           trustedPeers: [{ host: '127.0.0.1', port: 8333 }],

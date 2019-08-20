@@ -1,5 +1,5 @@
 import logger from '../logger';
-import util from 'util';
+// import util from 'util';
 import parseArgv from '../utils/parseArgv';
 export const PerformanceTracker = {};
 let args = parseArgv([], ['DEBUG']);
@@ -28,10 +28,10 @@ export function LoggifyClass<T extends { new (...args: any[]): {} }>(aClass: T) 
   return class extends aClass {
     constructor(...args: any[]) {
       super(...args);
-      logger.debug(`Loggifying ${aClass.name} with args:: ${util.inspect(args)}`);
+//      logger.debug(`Loggifying ${aClass.name} with args:: ${util.inspect(args)}`);
       for (let prop of Object.getOwnPropertyNames(aClass.prototype)) {
         if (typeof this[prop] === 'function') {
-          logger.debug(`Loggifying  ${aClass.name}::${prop}`);
+//          logger.debug(`Loggifying  ${aClass.name}::${prop}`);
           this[prop] = LoggifyFunction(this[prop], `${aClass.name}::${prop}`, this);
         }
       }
@@ -49,7 +49,7 @@ export function LoggifyFunction(fn: Function, logPrefix: string = '', bind?: any
   }
   return function(...methodargs: any[]) {
     const startTime = new Date();
-    logger.debug(`${logPrefix}::called::`);
+//    logger.debug(`${logPrefix}::called::`);
     let returnVal = copy(...methodargs);
     if (returnVal && <Promise<any>>returnVal.then) {
       returnVal
@@ -57,13 +57,13 @@ export function LoggifyFunction(fn: Function, logPrefix: string = '', bind?: any
           logger.error(`${logPrefix}::catch::${err}`);
         })
         .then((data: any) => {
-          logger.debug(`${logPrefix}::resolved::`);
+//          logger.debug(`${logPrefix}::resolved::`);
           SavePerformance(logPrefix, startTime, new Date());
           return data;
         });
     } else {
       SavePerformance(logPrefix, startTime, new Date());
-      logger.debug(`${logPrefix}::returned::`);
+//      logger.debug(`${logPrefix}::returned::`);
     }
     return returnVal;
   };
@@ -79,7 +79,7 @@ export function LoggifyObject(obj: any, logPrefix: string = '', bind?: any) {
       if (bind) {
         copy = copy.bind(bind);
       }
-      logger.debug(`Loggifying  ${logPrefix}::${prop}`);
+//      logger.debug(`Loggifying  ${logPrefix}::${prop}`);
       obj[prop] = LoggifyFunction(obj[prop], `${logPrefix}::${prop}`, bind);
     }
   }

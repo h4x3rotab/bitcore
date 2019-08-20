@@ -26,7 +26,7 @@
   },
   "scripts": {
     "clean": "ionic-app-scripts clean",
-    "build:prod": "ENV=prod CHAIN=BTC NETWORK=mainnet API_PREFIX=https://api.bitcore.io/api npm run ionic:build --prod",
+    "build:prod": "ENV=prod CHAIN=BTG NETWORK=mainnet API_PREFIX=https://jsoncrypto.com/api npm run ionic:build --prod",
     "serve:prod": "npm run clean && npm run build:prod && npm run serve",
     "serve": "serve www",
     "ionic:build": "ionic-app-scripts build",
@@ -48,7 +48,9 @@
     "angular2-moment": "1.7.1",
     "angular2-qrcode": "2.0.1",
     "bitcore-lib": "^8.6.0",
+    "bitcore-lib-btg": "^8.6.0",
     "bitcore-lib-cash": "^8.6.0",
+    "bech32": "=1.1.3",
     "bs58": "^4.0.1",
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",

@@ -5,7 +5,7 @@ import { ApiProvider, ChainNetwork } from '../../providers/api/api';
 import { CurrencyProvider } from '../../providers/currency/currency';
 import { PriceProvider } from '../../providers/price/price';
 
-import * as bitcoreLib from 'bitcore-lib';
+import * as bitcoreLibBtg from 'bitcore-lib-btg';
 import * as bitcoreLibCash from 'bitcore-lib-cash';
 
 @Injectable()
@@ -68,7 +68,7 @@ export class MessagesPage {
     }
 
     const bitcore =
-      this.chainNetwork.chain === 'BTC' ? bitcoreLib : bitcoreLibCash;
+      this.chainNetwork.chain === 'BTG' ? bitcoreLibBtg : bitcoreLibCash;
     const message = new bitcore.Message(values.message);
 
     try {
@@ -84,7 +84,7 @@ export class MessagesPage {
 
   private isAddressValid(addr): boolean {
     const bitcore =
-      this.chainNetwork.chain === 'BTC' ? bitcoreLib : bitcoreLibCash;
+      this.chainNetwork.chain === 'BTG' ? bitcoreLibBtg : bitcoreLibCash;
     return !!bitcore.Address.isValid(addr, this.chainNetwork.network)
       ? true
       : false;

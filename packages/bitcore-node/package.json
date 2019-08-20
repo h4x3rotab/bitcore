@@ -17,8 +17,9 @@
     "printWidth": 120
   },
   "scripts": {
-    "start": "npm run tsc && node build/src/server.js",
+    "start2": "npm run tsc && node build/src/server.js",
     "debug": "npm run tsc && node --inspect build/src/server.js --DEBUG true",
+    "start": "npm run tsc && node build/src/server.js --DEBUG true",
     "clean": "rm -rf build",
     "compile": "npm run tsc",
     "docs:build-html": "typedoc --out ./docs/html --tsconfig tsconfig.json ./src",
@@ -78,6 +79,7 @@
     "async": "^2.5.0",
     "bitcore-client": "^8.6.0",
     "bitcore-lib": "^8.6.0",
+    "bitcore-lib-btg": "^8.6.0",
     "bitcore-lib-cash": "^8.6.0",
     "bitcore-p2p": "^8.6.0",
     "bitcore-p2p-cash": "^8.6.0",

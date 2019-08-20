@@ -88,7 +88,7 @@ export class BlockModel extends BaseModel<IBlock> {
         { chain, network, hash: previousBlock.hash },
         { $set: { nextBlockHash: convertedBlock.hash } }
       );
-      logger.debug('Updating previous block.nextBlockHash ', convertedBlock.hash);
+//      logger.debug('Updating previous block.nextBlockHash ', convertedBlock.hash);
     }
 
     await TransactionStorage.batchImport({
@@ -129,7 +129,7 @@ export class BlockModel extends BaseModel<IBlock> {
     })();
 
     const height = (previousBlock && previousBlock.height + 1) || 1;
-    logger.debug('Setting blockheight', height);
+//    logger.debug('Setting blockheight', height);
 
     const convertedBlock: IBlock = {
       chain,
