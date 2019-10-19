@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ApiProvider, ChainNetwork } from '../../providers/api/api';
 import { CurrencyProvider } from '../../providers/currency/currency';
 import { BlocksProvider } from '../blocks/blocks';
-import { ApiCoin, TxsProvider } from '../transactions/transactions';
+import { ApiCoin, ApiEthCoin, TxsProvider } from '../transactions/transactions';
 
 export interface ApiAddr {
   confirmed: number;
@@ -27,15 +27,18 @@ export class AddressProvider {
     chainNetwork?: ChainNetwork
   ): Observable<ApiAddr> {
     return this.httpClient.get<ApiAddr>(
-      `${this.apiProvider.getUrlPrefix()}/${chainNetwork.chain}/${
-        chainNetwork.network
-      }/address/${addrStr}/balance`
+      `${this.apiProvider.getUrl(chainNetwork)}/address/${addrStr}/balance`
     );
   }
 
-  public getAddressActivity(addrStr?: string): Observable<ApiCoin[]> {
-    return this.httpClient.get<ApiCoin[]>(
-      `${this.apiProvider.getUrl()}/address/${addrStr}/txs?limit=1000`
+  public getAddressActivity(
+    addrStr?: string,
+    chainNetwork?: ChainNetwork
+  ): Observable<ApiCoin[] & ApiEthCoin[]> {
+    return this.httpClient.get<ApiCoin[] & ApiEthCoin[]>(
+      `${this.apiProvider.getUrl(
+        chainNetwork
+      )}/address/${addrStr}/txs?limit=1000`
     );
   }
 }
