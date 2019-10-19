@@ -1,7 +1,7 @@
 import { IValidation } from '..';
 const BitcoreBTG = require('bitcore-lib-btg');
 
- export class BtgValidation implements IValidation {
+export class BtgValidation implements IValidation {
   validateAddress(network: string, address: string): boolean {
     const AddressBTG = BitcoreBTG.Address;
     // Regular Address: try Bitcoin Cash

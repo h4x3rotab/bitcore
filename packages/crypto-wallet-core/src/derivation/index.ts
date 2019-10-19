@@ -1,6 +1,6 @@
-import { BtgDeriver } from './btg';
 import { BchDeriver } from './bch';
 import { BtcDeriver } from './btc';
+import { BtgDeriver } from './btg';
 import { EthDeriver } from './eth';
 import { Paths } from './paths';
 

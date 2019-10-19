@@ -1,6 +1,6 @@
 import { BchValidation } from './bch';
-import { BtgValidation } from './btg';
 import { BtcValidation } from './btc';
+import { BtgValidation } from './btg';
 import { EthValidation } from './eth';
 
 export interface IValidation {

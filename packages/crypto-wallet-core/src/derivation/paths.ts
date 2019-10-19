@@ -4,8 +4,8 @@ export const Paths = {
     livenet: "m/44'/0'/"
   },
   BTG: {
-    mainnet: `m/156'/0'/`,
-    livenet: `m/156'/0'/`
+    mainnet: "m/156'/0'/",
+    livenet: "m/156'/0'/"
   },
   BCH: {
     mainnet: "m/44'/145'/",
