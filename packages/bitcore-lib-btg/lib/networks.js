@@ -146,14 +146,8 @@ addNetwork({
   xpubkey: 0x0488b21e,
   xprivkey: 0x0488ade4,
   networkMagic:0xe1476d44,
-  port: 8333,
+  port: 8338,
   dnsSeeds: [
-    'seed.bitcoin.sipa.be',
-    'dnsseed.bluematt.me',
-    'dnsseed.bitcoin.dashjr.org',
-    'seed.bitcoinstats.com',
-    'seed.bitnodes.io',
-    'bitseed.xf2.org'
   ]
 });
 
@@ -169,16 +163,12 @@ addNetwork({
   pubkeyhash: 0x6f,
   privatekey: 0xef,
   scripthash: 0xc4,
-  bech32prefix: 'tb',
+  bech32prefix: 'tbtg',
   xpubkey: 0x043587cf,
   xprivkey: 0x04358394,
-  networkMagic: 0x0b110907,
-  port: 18333,
+  networkMagic: 0xE2486E45,
+  port: 18338,
   dnsSeeds: [
-    'testnet-seed.bitcoin.petertodd.org',
-    'testnet-seed.bluematt.me',
-    'testnet-seed.alexykot.me',
-    'testnet-seed.bitcoin.schildbach.de'
   ]
 });
 
@@ -194,7 +184,7 @@ addNetwork({
   pubkeyhash: 0x6f,
   privatekey: 0xef,
   scripthash: 0xc4,
-  bech32prefix: 'bcrt',
+  bech32prefix: 'btgrt',
   xpubkey: 0x043587cf,
   xprivkey: 0x04358394,
   networkMagic: 0xfabfb5da,
