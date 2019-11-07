@@ -8,6 +8,10 @@ import { BitcoinBlockStorage } from '../../src/models/block';
 import { validateDataForBlock } from './db-verify';
 import { TransactionStorage } from '../../src/models/transaction';
 import { BitcoinP2PWorker } from "../../src/modules/bitcoin/p2p";
+import { Modules } from '../../src/modules';
+
+// Load modules
+Modules.loadConfigured();
 
 (async () => {
   const { CHAIN, NETWORK, FILE, DRYRUN } = process.env;

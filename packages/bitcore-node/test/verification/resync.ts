@@ -1,6 +1,10 @@
 import { Config } from '../../src/services/config';
 import { Storage } from '../../src/services/storage';
 import { BitcoinP2PWorker } from '../../src/modules/bitcoin/p2p';
+import { Modules } from '../../src/modules';
+
+// Load modules
+Modules.loadConfigured();
 
 (async () => {
   const { CHAIN: chain, NETWORK: network, START, END } = process.env;
