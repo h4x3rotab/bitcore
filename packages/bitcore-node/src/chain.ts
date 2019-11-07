@@ -1,7 +1,7 @@
 module.exports = {
   BTG: {
     lib: require('bitcore-lib-btg'),
-    p2p: require('bitcore-p2p'),
+    p2p: require('bitcore-p2p-btg'),
     p2pV: 70010
   } /* ,
   BTC: {
