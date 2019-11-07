@@ -1,6 +1,6 @@
 import { Component, Injectable } from '@angular/core';
 import { IonicPage, NavParams } from 'ionic-angular';
-import { ApiProvider, ChainNetwork } from '../../providers/api/api';
+import { ApiProvider, ChainNetwork, isUTXOChain } from '../../providers/api/api';
 import { CurrencyProvider } from '../../providers/currency/currency';
 import { PriceProvider } from '../../providers/price/price';
 import { RedirProvider } from '../../providers/redir/redir';
@@ -55,10 +55,9 @@ export class TransactionPage {
     this.txProvider.getTx(this.txId, this.chainNetwork).subscribe(
       response => {
         let tx;
-        if(this.chainNetwork.chain === "BTC" || this.chainNetwork.chain === "BCH") {
+        if(isUTXOChain(this.chainNetwork.chain)) {
           tx = this.txProvider.toUtxoCoinsAppTx(response);
-        }
-        if(this.chainNetwork.chain === "ETH") {
+        } else if(this.chainNetwork.chain === "ETH") {
           tx = this.txProvider.toEthAppTx(response);
         }
         this.tx = tx;

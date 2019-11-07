@@ -1,6 +1,6 @@
 import { Component, Injectable } from '@angular/core';
 import { IonicPage, NavParams } from 'ionic-angular';
-import { ApiProvider, ChainNetwork } from '../../providers/api/api';
+import { ApiProvider, ChainNetwork, isUTXOChain } from '../../providers/api/api';
 import { BlocksProvider } from '../../providers/blocks/blocks';
 import { CurrencyProvider } from '../../providers/currency/currency';
 import { PriceProvider } from '../../providers/price/price';
@@ -54,10 +54,9 @@ export class BlockDetailPage {
     this.blocksProvider.getBlock(this.blockHash, this.chainNetwork).subscribe(
       response => {
         let block;
-        if(this.chainNetwork.chain === "BTC" || this.chainNetwork.chain === "BCH") {
+        if(isUTXOChain(this.chainNetwork.chain)) {
           block = this.blocksProvider.toUtxoCoinAppBlock(response);
-        }
-        if(this.chainNetwork.chain === "ETH") {
+        } else if(this.chainNetwork.chain === "ETH") {
           block = this.blocksProvider.toEthAppBlock(response);
         }
         this.block = block;

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ChainNetwork } from '../../providers/api/api';
+import { ChainNetwork, isUTXOChain } from '../../providers/api/api';
 import { ApiEthTx, ApiUtxoCoinTx, TxsProvider } from '../../providers/transactions/transactions';
 
 import * as _ from 'lodash';
@@ -30,10 +30,9 @@ export class TransactionListComponent implements OnInit {
           response => {            
             // Newly Generated Coins (Coinbase) First
             const txs = response.map((tx: ApiEthTx & ApiUtxoCoinTx) => {
-              if(this.chainNetwork.chain === "BTC" || this.chainNetwork.chain === "BCH") {
+              if(isUTXOChain(this.chainNetwork.chain)) {
                 return this.txProvider.toUtxoCoinsAppTx(tx)
-              }
-              if(this.chainNetwork.chain === "ETH") {
+              } else if(this.chainNetwork.chain === "ETH") {
                 return this.txProvider.toEthAppTx(tx)
               }
             });

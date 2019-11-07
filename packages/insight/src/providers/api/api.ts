@@ -144,3 +144,7 @@ export class ApiProvider {
     };
   }
 }
+
+export function isUTXOChain(chain: string): boolean {
+  return chain === 'BTC' || chain === 'BCH' || chain === 'BTG';
+}
