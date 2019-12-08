@@ -86,7 +86,7 @@ export class BlocksProvider {
   }
 
   public toUtxoCoinAppBlock(block: ApiUtxoCoinBlock): AppUtxoCoinBlock {
-    const difficulty: number = 0x1d00ffff / block.bits;
+    const difficulty: number = 0x1f07ffff / block.bits;
     return {
       ...this.toAppBlock(block),
       merkleroot: block.merkleRoot,
