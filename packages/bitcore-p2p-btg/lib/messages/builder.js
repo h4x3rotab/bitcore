@@ -63,6 +63,7 @@ function builder(options) {
       sendheaders: 'SendHeaders',
       sendcmpct: 'SendCmpct',
       cmpctblock: 'CmpctBlock',
+      feefilter: 'FeeFilter',
     },
     commands: {}
   };

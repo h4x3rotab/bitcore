@@ -1,0 +1,8 @@
+2019-11-25T18:43:29,667 ERROR: You must give at least one requirement to uninstall (see "pip help uninstall")
+2019-11-25T18:43:29,667 Exception information:
+2019-11-25T18:43:29,667 Traceback (most recent call last):
+2019-11-25T18:43:29,667   File "/usr/local/lib/python3.6/dist-packages/pip/_internal/cli/base_command.py", line 153, in _main
+2019-11-25T18:43:29,667     status = self.run(options, args)
+2019-11-25T18:43:29,667   File "/usr/local/lib/python3.6/dist-packages/pip/_internal/commands/uninstall.py", line 70, in run
+2019-11-25T18:43:29,667     '"pip help %(name)s")' % dict(name=self.name)
+2019-11-25T18:43:29,667 pip._internal.exceptions.InstallationError: You must give at least one requirement to uninstall (see "pip help uninstall")
