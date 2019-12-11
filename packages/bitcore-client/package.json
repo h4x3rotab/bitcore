@@ -13,8 +13,8 @@
   },
   "scripts": {
     "clean": "rm -rf ./ts_build",
-    "watch": "./node_modules/.bin/tsc --watch",
-    "compile": "npm run clean && ./node_modules/.bin/tsc",
+    "watch": "tsc --watch",
+    "compile": "npm run clean && tsc",
     "test": "mocha ./test/unit"
   },
   "dependencies": {
