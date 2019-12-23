@@ -1,6 +1,7 @@
 export interface ConfigType {
   maxPoolSize: number;
   port: number;
+  host: string;
   dbUrl: string;
   dbHost: string;
   dbName: string;

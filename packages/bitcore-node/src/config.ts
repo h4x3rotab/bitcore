@@ -55,6 +55,7 @@ const Config = function(): ConfigType {
   let config: ConfigType = {
     maxPoolSize: 50,
     port: 3000,
+    host: '127.0.0.1',
     dbUrl: process.env.DB_URL || '',
     dbHost: process.env.DB_HOST || '127.0.0.1',
     dbName: process.env.DB_NAME || 'bitcore-btg',

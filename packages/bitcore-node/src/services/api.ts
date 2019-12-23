@@ -10,6 +10,7 @@ import { ConfigService, Config } from './config';
 @LoggifyClass
 export class ApiService {
   port: number;
+  host: string;
   timeout: number;
   configService: ConfigService;
   storageService: StorageService;
@@ -20,12 +21,14 @@ export class ApiService {
 
   constructor({
     port = 3000,
+    host = '127.0.0.1',
     timeout = 600000,
     configService = Config,
     storageService = Storage,
     socketService = Socket
   } = {}) {
     this.port = Number(process.env.BITCORE_NODE_HTTP_PORT) || port;
+    this.host = process.env.BITCORE_NODE_HTTP_HOST || host;
     this.timeout = timeout;
     this.configService = configService;
     this.storageService = storageService;
@@ -45,7 +48,7 @@ export class ApiService {
     if (this.stopped) {
       this.stopped = false;
       this.httpServer.timeout = this.timeout;
-      this.httpServer.listen(this.port, () => {
+      this.httpServer.listen(this.port, this.host, () => {
         logger.info(`Starting API Service on port ${this.port}`);
         this.socketService.start({ server: this.httpServer });
       });
