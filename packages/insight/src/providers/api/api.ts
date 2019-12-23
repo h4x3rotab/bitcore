@@ -18,7 +18,8 @@ export interface NetworkSettings {
 const CurrentEnv = process.env.ENV || 'dev';
 
 const EnvApiHosts: { [env: string]: string[] } = {
-  prod: ['https://api.bitcore.io/api', 'https://api-eth.bitcore.io/api'],
+  // prod: ['https://api.bitcore.io/api', 'https://api-eth.bitcore.io/api'],
+  prod: ['/api'],
   dev: ['/api']
 };
 
